@@ -1,3 +1,4 @@
+#/usr/bin/python
 from PyQt5.QtWidgets import (QApplication, QComboBox, QDialog,
 QDialogButtonBox, QFormLayout, QGridLayout, QGroupBox, QHBoxLayout,
 QLabel, QLineEdit, QMenu, QMenuBar, QPushButton, QSpinBox, QTextEdit,
@@ -6,6 +7,8 @@ QVBoxLayout)
 from PyQt5.QtCore import pyqtSlot
  
 import sys
+
+# import webInteractive as web
  
 class Dialog(QDialog):
  
@@ -25,14 +28,10 @@ class Dialog(QDialog):
         self.formGroupBox = QGroupBox("Enter The Fields Below")
         self.layout = QFormLayout()
         self.csvbox = QLineEdit()
-        self.namebox = QLineEdit()
-        self.emailbox = QLineEdit()
         self.subjectbox = QLineEdit()
         self.messagebox = QLineEdit()
 
         self.layout.addRow(QLabel("CSV File:"),self.csvbox)
-        self.layout.addRow(QLabel("Name:"),self.namebox)
-        self.layout.addRow(QLabel("Email:"), self.emailbox)
         self.layout.addRow(QLabel("Subject:"), self.subjectbox)
         self.layout.addRow(QLabel("Message:"), self.messagebox)
         self.formGroupBox.setLayout(self.layout)
@@ -43,19 +42,13 @@ class Dialog(QDialog):
         csv = self.csvbox.text
         csv = str(csv)
 
-        if "<built-" in csv:
-            name = self.namebox.text
-            email = self.emailbox.text
-        else:
-            print(" ")
-            #call csv parser
+        print(" ")
+        #call csv parser
             
         
         subject = self.subjectbox.text
         message = self.messagebox.text
 
-        self.namebox.clear()
-        self.emailbox.clear()
         self.csvbox.clear()
         
         
