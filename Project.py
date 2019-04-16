@@ -27,7 +27,7 @@ class Dialog(QDialog):
         self.setWindowTitle("Python Project")
  
     def createFormGroupBox(self):
-        self.formGroupBox = QGroupBox("Enter The Fields Below")
+        self.formGroupBox = QGroupBox("Enter The Fields Below. CSV will only let you input a proper CSV (Ex. test.csv) You can also use --- wherever you want a name to be replaced.")
         self.layout = QFormLayout()
         self.csvbox = QLineEdit()
         self.csvbox.clear()
