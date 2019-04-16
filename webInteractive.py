@@ -5,12 +5,14 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
 import time
 
-def webInteractive(name, email,subject,messageBody):
+def webInteractive(subjectP, messageBodyP, nameEmail):
     # Testing input only, comment out later
     # name = input("Name: ")
     # email = input("Email: ")
     # subject = input("Subject: ")
     # messageBody = input("Message Text: ")
+    subject = subjectP
+    messageBody = messageBodyP
 
     # Setting up browser
     browser = webdriver.Firefox() 
@@ -30,24 +32,36 @@ def webInteractive(name, email,subject,messageBody):
     except:
         time.sleep(0.1)
 
-    time.sleep(7)
-    # TODO future start of loop to create multiple emails
-    for (i < len(email)):
+    time.sleep(9)
+    save = messageBody
+    for name,email in nameEmail.items():
     # Wait and tab to compose button
+        messageBody = save
         actions = ActionChains(browser)
-        actions.send_keys(Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB,Keys.TAB,Keys.ENTER)
+        actions.send_keys("c")
         actions.perform()
-        while ('--' in messageBody):
-            body = messageBody.replace('--',name[i])
-        # Composition of email
-        time.sleep(2)
-        sendEmail = ActionChains(browser)
-        sendEmail.send_keys(email[i], Keys.TAB, Keys.TAB, subject, Keys.TAB, body, Keys.TAB, Keys.ENTER)
-        sendEmail.perform()
+        time.sleep(4)
+        while ('---' in messageBody):
+            messageBody = messageBody.replace('---',name)
+        # # Composition of email
+        emailInsert = ActionChains(browser)
+        emailInsert.send_keys(email, Keys.ENTER, Keys.TAB)
+        emailInsert.perform()
+        time.sleep(1)
+
+        subjectInsert = ActionChains(browser)
+        subjectInsert.send_keys(subject, Keys.TAB)
+        subjectInsert.perform()
+        time.sleep(1)
+
+        bodyInsert = ActionChains(browser)
+        bodyInsert.send_keys(messageBody, Keys.TAB, Keys.ENTER)
+        bodyInsert.perform()
+        time.sleep(1)
 
     # Wait and close current browser
-    sleep.timer(2)
+    time.sleep(2)
     browser.close()
 
 if __name__ == "__main__":
-    webInteractive(name,email,subject,messageBody)
+    webInteractive(subjectP,messageBodyP,nameEmail)
