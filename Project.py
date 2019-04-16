@@ -2,7 +2,7 @@
 from PyQt5.QtWidgets import (QApplication, QComboBox, QDialog,
 QDialogButtonBox, QFormLayout, QGridLayout, QGroupBox, QHBoxLayout,
 QLabel, QLineEdit, QMenu, QMenuBar, QPushButton, QSpinBox, QTextEdit,
-QVBoxLayout)
+QVBoxLayout, QMessageBox)
 
 from PyQt5.QtCore import pyqtSlot
  
@@ -41,13 +41,26 @@ class Dialog(QDialog):
     @pyqtSlot()
     def on_click(self):
         csv = self.csvbox.text()
-        csv = str(csv)
         subject = self.subjectbox.text()
         message = self.messagebox.text()
+        subject = str(subject)
+        csv = str(csv)
+        message = str(message)
 
-        print(subject)
-        self.csvbox.clear()
+        if ".csv" not in csv:
+            QMessageBox.question(self, 'Error!', "Please Enter A Valid CSV", QMessageBox.Ok, QMessageBox.Ok)
+            return 
+        if subject == "":
+            QMessageBox.question(self, 'Error!', "Please Enter A Subject", QMessageBox.Ok, QMessageBox.Ok)
+            return
         
+        if message == "":
+            QMessageBox.question(self, 'Error!', "Please Enter A Message", QMessageBox.Ok, QMessageBox.Ok)
+            return
+        
+        self.csvbox.clear()
+        self.subjectbox.clear()
+        self.messagebox.clear()
         
 
 
