@@ -16,10 +16,10 @@ class Dialog(QDialog):
         super(Dialog, self).__init__()
         self.createFormGroupBox()
         self.button = QPushButton('Enter', self)
-        self.button.clicked.connect(self.on_click)
         mainLayout = QVBoxLayout()
         mainLayout.addWidget(self.formGroupBox)
         mainLayout.addWidget(self.button)
+        self.button.clicked.connect(self.on_click)
         self.setLayout(mainLayout)
  
         self.setWindowTitle("Python Project")
@@ -28,8 +28,9 @@ class Dialog(QDialog):
         self.formGroupBox = QGroupBox("Enter The Fields Below")
         self.layout = QFormLayout()
         self.csvbox = QLineEdit()
-        self.subjectbox = QLineEdit()
-        self.messagebox = QLineEdit()
+        self.csvbox.clear()
+        self.subjectbox = QLineEdit(self)
+        self.messagebox = QLineEdit(self)
 
         self.layout.addRow(QLabel("CSV File:"),self.csvbox)
         self.layout.addRow(QLabel("Subject:"), self.subjectbox)
@@ -39,16 +40,12 @@ class Dialog(QDialog):
 
     @pyqtSlot()
     def on_click(self):
-        csv = self.csvbox.text
+        csv = self.csvbox.text()
         csv = str(csv)
+        subject = self.subjectbox.text()
+        message = self.messagebox.text()
 
-        print(" ")
-        #call csv parser
-            
-        
-        subject = self.subjectbox.text
-        message = self.messagebox.text
-
+        print(subject)
         self.csvbox.clear()
         
         
