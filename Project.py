@@ -8,7 +8,9 @@ from PyQt5.QtCore import pyqtSlot
  
 import sys
 
-# import webInteractive as web
+import csv_parser as parse
+
+import webInteractive as web
  
 class Dialog(QDialog):
  
@@ -58,6 +60,8 @@ class Dialog(QDialog):
             QMessageBox.question(self, 'Error!', "Please Enter A Message", QMessageBox.Ok, QMessageBox.Ok)
             return
         
+        nameEmail = parse.csv_parser(csv)
+        web.webInteractive(subject,message,nameEmail)
         self.csvbox.clear()
         self.subjectbox.clear()
         self.messagebox.clear()
