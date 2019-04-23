@@ -1,24 +1,27 @@
 from __future__ import print_function
+import time
+import sys
 
-def csv_parser(name):
+def csv_parser_file(name):
 	f = open(name, 'r')
 	employees = { }
 	for line in f:
-		if line == "\n":
-			print("Empty line. Skipping.")
-			continue
-		line = line.split(',')
-		if len(line) < 2:
-			if line[0].find("@") != -1:
-				print("Line is missing name. Skipping.")
-			else:
-				print("Line is missing email. Skipping.")
-			continue
-		elif line[0].find("@") != -1:
+		line.split(',')
+		if len(line) != 2:
+			print("Invalid number of arguments.")
+		elif line[1].find("@") != -1:
 			print("Invalid syntax: first element is not a name.")
 			continue
 		else:
-			email = line[1][:-1]
-			employees[line[0]] = email
+			person = [line[1], line[2]]
+			email = line[3]
+			employees[person] = email
 	f.close()
 	return employees
+
+""" 
+def getDay():
+
+
+
+"""
