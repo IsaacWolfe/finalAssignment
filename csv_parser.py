@@ -47,5 +47,6 @@ def csv_parser(name):
 			email = line[1][:-1]
 			employees[line[0]] = email
 	f.close()
-	print_errors(errors);
+	for i in errors
+		print(i)
 	return employees
