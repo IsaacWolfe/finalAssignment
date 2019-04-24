@@ -19,34 +19,34 @@ class CSV_Error:
 
 def csv_parser(name):
 	f = open(name, 'r')
+	g = open("errors.txt", 'w')
 	employees = { }
-	errors = [ ]
 	line_count = 1
 	for line in f:
 		if line == "\n":
-			print("Error found. Skipping line.")
-			errors.append(CSV_Error(line_count, "\n", "Empty line", 0))
+			error0 = CSV_Error(line_count, "\n", "Empty line", 0)
+			print(error0,"\n------\n", file=open("errors.txt",'a'))
 			continue
 		line = line.split(',')
 		if len(line) < 2:
 			if line[0].find("@") != -1:
-				print("Error found. Skipping line.")
-				errors.append(CSV_Error(line_count, line[0], "First element is not a name", 3))
+				error1 = CSV_Error(line_count, line[0], "First element is not a name", 3)
+				print(error1, "\n-----\n",file=open("errors.txt",'a'))
 			else:
-				print("Error found. Skipping line.")
-				errors.append(CSV_Error(line_count, line[0], "Name does not have an associated email", 2))
+				error2 = CSV_Error(line_count, line[0], "Name does not have an associated email", 2)
+				print(error2, "\n-----\n",file=open("errors.txt",'a'))
 			continue
 		elif len(line) > 2:
-			print("Error found. Skipping line.")
-			errors.append(CSV_Error(line_count, line[0], "Line contains too many variables", 1))
+			error3 = CSV_Error(line_count, line[0], "Line contains too many variables", 1)
+			print(error3, "\n-----\n",file=open("errors.txt", 'a'))
 		elif line[0].find("@") != -1:
-			print("Error found. Skipping line.")
-			errors.append(CSV_Errors(line_count, line[0], "First element is not a name", 3))
+			error4 = CSV_Errors(line_count, line[0], "First element is not a name", 3)
+			print(error4, "\n-----\n",file=open("errors.txt", 'a'))
 			continue
 		else:
 			email = line[1][:-1]
 			employees[line[0]] = email
+		line_count+=1
 	f.close()
-	for i in errors:
-		print(i)
+	g.close()
 	return employees
